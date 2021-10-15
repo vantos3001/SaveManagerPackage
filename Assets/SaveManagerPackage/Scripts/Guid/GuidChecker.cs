@@ -4,7 +4,7 @@ namespace SaveManagerPackage.Scripts.Guid
 {
     public static class GuidValidator
     {
-        public static bool Validate(Guid guid, string name, string additionalInfo = "")
+        public static bool Validate(this Guid guid, string name, string additionalInfo = "")
         {
             if (guid == null)
             {
@@ -15,7 +15,7 @@ namespace SaveManagerPackage.Scripts.Guid
             return true;
         }
         
-        public static bool Validate(string guidId, string name, string additionalInfo = "")
+        public static bool ValidateGuid(this string guidId, string name, string additionalInfo = "")
         {
             if (string.IsNullOrEmpty(guidId))
             {
@@ -26,7 +26,7 @@ namespace SaveManagerPackage.Scripts.Guid
             return true;
         }
         
-        public static bool Validate(GuidAsset guid, string name, string additionalInfo = "")
+        public static bool Validate(this GuidAsset guid, string name, string additionalInfo = "")
         {
             if (guid == null)
             {
