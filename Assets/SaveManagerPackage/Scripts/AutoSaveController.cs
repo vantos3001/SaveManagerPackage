@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SaveManagerPackage.Scripts
 {
@@ -12,11 +12,18 @@ namespace SaveManagerPackage.Scripts
         private void Awake()
         {
             DontDestroyOnLoad(this);
+
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         private void Update()
         {
             _currentTimeBetweenSaves += Time.deltaTime;
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        {
+            TryAutoSave();
         }
 
         private void TryAutoSave()
@@ -54,6 +61,11 @@ namespace SaveManagerPackage.Scripts
         public void OnApplicationQuit()
         {
             TryAutoSave();
+        }
+
+        private void OnDestroy()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 }
